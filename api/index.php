@@ -2,14 +2,24 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-putenv('APP_CONFIG_CACHE=/tmp/config.php');
-putenv('APP_EVENTS_CACHE=/tmp/events.php');
-putenv('APP_PACKAGES_CACHE=/tmp/packages.php');
-putenv('APP_ROUTES_CACHE=/tmp/routes.php');
-putenv('APP_SERVICES_CACHE=/tmp/services.php');
-putenv('VIEW_COMPILED_PATH=/tmp');
-putenv('SESSION_DRIVER=cookie');
-putenv('LOG_CHANNEL=stderr');
-putenv('APP_DEBUG=true');
+$envs = [
+    'APP_CONFIG_CACHE' => '/tmp/config.php',
+    'APP_EVENTS_CACHE' => '/tmp/events.php',
+    'APP_PACKAGES_CACHE' => '/tmp/packages.php',
+    'APP_ROUTES_CACHE' => '/tmp/routes.php',
+    'APP_SERVICES_CACHE' => '/tmp/services.php',
+    'VIEW_COMPILED_PATH' => '/tmp',
+    'SESSION_DRIVER' => 'array',
+    'LOG_CHANNEL' => 'stderr',
+    'APP_DEBUG' => 'true',
+    'APP_ENV' => 'local',
+    'APP_KEY' => 'base64:nqF1cttaphq58rTlBri+iNefjLjDmxtBMqHkyFLC2aY=',
+];
 
-require __DIR__ . "/../public/index.php";
+foreach ($envs as $k => $v) {
+    putenv("$k=$v");
+    $_ENV[$k] = $v;
+    $_SERVER[$k] = $v;
+}
+
+require __DIR__ . '/../public/index.php';
