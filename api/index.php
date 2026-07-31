@@ -2,6 +2,12 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+set_exception_handler(function($e) {
+    echo "<h1>Laravel Boot Error</h1>";
+    echo "<pre>" . (string)$e . "</pre>";
+    exit;
+});
+
 $envs = [
     'APP_CONFIG_CACHE' => '/tmp/config.php',
     'APP_EVENTS_CACHE' => '/tmp/events.php',
