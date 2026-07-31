@@ -28,4 +28,5 @@ foreach ($envs as $k => $v) {
     $_SERVER[$k] = $v;
 }
 
-require __DIR__ . '/../public/index.php';
+// require __DIR__ . '/../public/index.php';
+phpinfo();
